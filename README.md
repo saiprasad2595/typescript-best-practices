@@ -36,6 +36,9 @@ By using this we can overcome the runtime errors
 ```
 TypeError: Cannot read property 'foo' of undefined
 ```
+# Feel free to Contribute
+
+You can raise a PR for contribution. Once it is reviewed it will be merged to master. You can name yourself in contributors list as well.
 
 
 # Sources
