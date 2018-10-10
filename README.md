@@ -36,6 +36,26 @@ By using this we can overcome the runtime errors
 ```
 TypeError: Cannot read property 'foo' of undefined
 ```
+### Getter / Setter
+
+Instead of :
+```
+declare function duration(value?: number): any;
+```
+better to do:
+```
+declare function duration(): number;
+declare function duration(value: number): void;
+```
+### Fluent:
+
+Pretty self explanatory:
+```
+interface Something {
+   foo(): Something;
+   bar(): Something;
+}
+```
 # Feel free to Contribute
 
 You can raise a PR for contribution. Once it is reviewed it will be merged to master. You can name yourself in contributors list as well.
