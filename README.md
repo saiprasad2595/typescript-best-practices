@@ -36,25 +36,56 @@ By using this we can overcome the runtime errors
 ```
 TypeError: Cannot read property 'foo' of undefined
 ```
-### Getter / Setter
-
-Instead of :
+### Return Types of Callbacks
+Don’t use the return type any for callbacks whose value will be ignored:
 ```
-declare function duration(value?: number): any;
-```
-better to do:
-```
-declare function duration(): number;
-declare function duration(value: number): void;
-```
-### Fluent:
-
-Pretty self explanatory:
-```
-interface Something {
-   foo(): Something;
-   bar(): Something;
+/* WRONG */
+function fn(x: () => any) {
+    x();
 }
+```
+Do use the return type void for callbacks whose value will be ignored:
+```
+/* OK */
+function fn(x: () => void) {
+    x();
+}
+```
+
+### Overloads and Callbacks
+Don’t write separate overloads that differ only on callback arity:
+```
+/* WRONG */
+declare function beforeAll(action: () => void, timeout?: number): void;
+declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): void;
+```
+Do write a single overload using the maximum arity:
+```
+/* OK */
+declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): void;
+```
+
+## Function Overloads
+### Ordering
+Don’t put more general overloads before more specific overloads:
+```
+/* WRONG */
+declare function fn(x: any): any;
+declare function fn(x: HTMLElement): number;
+declare function fn(x: HTMLDivElement): string;
+
+var myElem: HTMLDivElement;
+var x = fn(myElem); // x: any, wat?
+```
+Do sort overloads by putting the more general signatures after more specific signatures:
+```
+/* OK */
+declare function fn(x: HTMLDivElement): string;
+declare function fn(x: HTMLElement): number;
+declare function fn(x: any): any;
+
+var myElem: HTMLDivElement;
+var x = fn(myElem); // x: string, :)
 ```
 # Feel free to Contribute
 
