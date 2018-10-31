@@ -134,5 +134,5 @@ You can raise a PR for contribution. Once it is reviewed it will be merged to ma
 # Sources
 https://codeburst.io/five-tips-i-wish-i-knew-when-i-started-with-typescript-c9e8609029db
 
-# Contributors
+# Contributor
 saiprasad2595
