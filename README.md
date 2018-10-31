@@ -6,7 +6,7 @@ For better typescripting you need to maintain better tsconfig.json file and tsli
 
 Below are the few strict configurations you need to follow.
 
-> 1) Strict Configuration
+> ## Strict Configuration
 
  Enable these flags in tsconfig.json file.
 ```
@@ -14,10 +14,10 @@ Below are the few strict configurations you need to follow.
   "forceConsistentCasingInFileNames": true,
   "noImplicitReturns": true,
   "strict": true,
-  "noUnusedLocals": true,
+  "noUnusedLocals": true
 }
 ```
-- strictNullChecks
+- #### strictNullChecks
 
 ```
 interaface Foo{
@@ -36,6 +36,45 @@ By using this we can overcome the runtime errors
 ```
 TypeError: Cannot read property 'foo' of undefined
 ```
+
+```
+- #### noImplicitAny
+```
+You need to turn on the rule in tslint.json
+
+```
+no-any: true
+```
+
+This helps in showing the error if you dont define any type for function or variables. And it is strictly asked to define the type. If you dont define any type for the function or variable defautly it takes 'any' type which is considered as evil.
+
+> ## instanceof operator
+```
+  class A {
+    hello() {
+      console.log('hello');
+    }
+  }
+
+  class B {
+    bonjour() {
+      console.log('bonjour');
+    }
+  }
+
+  const myFunction2 = (sayHello: A | B) => {
+    if (sayHello instanceof A) {
+      sayHello.hello();
+    } else {
+      sayHello.bonjour();
+    }
+  }
+
+  myFunction2(new A());
+```
+
+The above code consoles 'hello'. In this example we are able to infer classes in if and else statements.
+
 ### Return Types of Callbacks
 Don’t use the return type any for callbacks whose value will be ignored:
 ```
